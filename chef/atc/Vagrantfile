@@ -3,18 +3,18 @@
 boxes = [
     {
         :name => :precise,
-        :box    => 'chef/ubuntu-12.04',
+        :box    => 'bento/ubuntu-12.04',
         :chef_version => :latest,
     },
     {
         :name => :centos6,
-        :box    => 'chef/centos-6.6',
+        :box    => 'bento/centos-6.6',
         :chef_version => :latest,
         :python_from_source => true,
     },
     {
         :name => :trusty,
-        :box    => 'chef/ubuntu-14.04',
+        :box    => 'bento/ubuntu-14.04',
         :chef_version => :latest,
     },
 ]
@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     boxes.each do |opts|
         config.vm.define opts[:name] do |box|
             box.vm.box = opts[:box]
-            box.vm.synced_folder '../../atc', '/usr/local/src/atc/atc'
+            box.vm.synced_folder '../..', '/usr/local/src/atc'
             # Chef install
             box.omnibus.chef_version = opts.fetch(:chef_version, :latest)
             # hostname

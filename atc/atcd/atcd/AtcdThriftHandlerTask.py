@@ -164,6 +164,13 @@ class AtcdThriftHandlerTask(ThriftHandlerTask):
         help='Amount of bytes that can be burst at a capped speed '
                 '[%(default)s]'
     )
+    dont_drop_packets = option(
+        action='store_true',
+        help='[EXPERIMENTAL] Do not drop packets when going above max allowed'
+             ' rate. Packets will be queued instead. Please mind that this'
+             ' option will likely disappear in the future and is only provided'
+             '  as a workaround until better longer term solution is found.',
+    )
     fresh_start = option(
         action='store_true',
         help='Bypass saved shapings from a previous run [%(default)s]',
@@ -280,8 +287,8 @@ class AtcdThriftHandlerTask(ThriftHandlerTask):
                     # We have a shaping set in database that is denied
                     # probably because it was set in unsecure mode, passing
                     if (
-                            e.code == ReturnCode.ACCESS_DENIED
-                            and self.mode == 'secure'):
+                            e.code == ReturnCode.ACCESS_DENIED and
+                            self.mode == 'secure'):
                         self.logger.warn(
                             'Shaping Denied in secure mode, passing:'
                             ' {0}'.format(e.message)

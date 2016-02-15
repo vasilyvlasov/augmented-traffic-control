@@ -1,5 +1,9 @@
 # Augmented Traffic Control
 
+[![build-status-image]][travis]
+[![pypi-version]][pypi]
+
+
 Full documentation for the project is available at [http://facebook.github.io/augmented-traffic-control/](http://facebook.github.io/augmented-traffic-control/).
 
 ## Overview
@@ -29,8 +33,8 @@ By splitting `ATC` in sub-components, it make it easier to hack on it or build o
 
 Most requirements are handled automatically by [pip](https://pip.pypa.io), the packaging system used by ATC, and each `ATC` package may have different requirements and the README.md files of the respective packages should be checked for more details. Anyhow, some requirements apply to the overall codebase:
 
-* Python 2.7+
-* Django 1.7+
+* Python 2.7: Currently, ATC is only supported on python version 2.7.
+* Django 1.7: Currently, ATC is only supported using django version 1.7.
 
 
 ## Installing ATC
@@ -164,6 +168,8 @@ Interacting with ATC will only shape the traffic within the VM and not on the ho
 
 ### Setting up the environment
 
+Note: vagrant is an easy way to set up a test environment, but virtualization will produce different results than a setup on bare-metal. We recommend using vagrant only for testing/development and using bare-metal for setups which require realistic shaping settings.
+
 You will need to install VirtualBox, Vagrant and a couple of plugins:
 
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
@@ -254,3 +260,8 @@ cd /var/django && python manage.py runserver 0.0.0.0:8000
 ```
 
 [atc_architecture]: https://facebook.github.io/augmented-traffic-control/images/atc_overview.png
+[build-status-image]: https://travis-ci.org/facebook/augmented-traffic-control.svg?branch=master
+[travis]: https://travis-ci.org/facebook/augmented-traffic-control?branch=master
+[pypi-version]: https://pypip.in/version/atcd/badge.svg
+[pypi]: https://pypi.python.org/pypi/atcd
+

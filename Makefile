@@ -12,6 +12,9 @@
 # Described fully in `tests/Vagrantfile`.
 TESTVMS = gateway client server
 
+FLAKE=python -m flake8
+PEP=pep8
+
 
 # By default, we just lint since we want this to be **fast**.
 # In the future when unit testing becomes better this should run quick tests.
@@ -47,7 +50,7 @@ publish:
 # Cleans up python dist files
 .PHONY: clean
 clean:
-	rm -rf atc/atcd/dist atc/atc_thrift/dist atc/django-atc-api/dist atc/django-atc-demo-ui/dist atc/django-atc-profile-storage/dist
+	rm -rf atc/{atcd,atc_thrift,django-atc-api,django-atc-demo-ui,django-atc-profile-storage}/{build,dist}
 
 
 # Lint the various sources that ATC includes:
@@ -64,9 +67,9 @@ chef_lint:
 
 .PHONY: python_lint
 python_lint:
-	pep8 atc
-	flake8 atc
-	flake8 tests/
+	$(PEP) atc
+	$(FLAKE) atc
+	$(FLAKE) tests/
 
 
 # Performs setup, runs the tests, then cleans up.
